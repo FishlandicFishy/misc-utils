@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sort Characters by Unicode</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+        }
+        .textbox, .result {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        .result {
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sort Characters by Unicode</h1>
+        <input type="text" id="inputText" class="textbox" placeholder="Type something...">
+        <div id="sortedText" class="result"></div>
+    </div>
+
+    <script>
+        function sortCharactersByUnicode(str) {
+            return str.split('').sort((a, b) => a.codePointAt(0) - b.codePointAt(0)).join('');
+        }
+
+        document.getElementById('inputText').addEventListener('input', function() {
+            const input = this.value;
+            const sorted = sortCharactersByUnicode(input);
+            document.getElementById('sortedText').textContent = sorted;
+        });
+    </script>
+</body>
+</html>
