@@ -1,2 +1,1 @@
 # misc-utils
-Miscellaneous utilities
