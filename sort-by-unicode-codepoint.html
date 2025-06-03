@@ -6,7 +6,7 @@
     <title>Sort Characters by Unicode Codepoint</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: "Pretendard Std Variable", "Inter Alia", "Inter", "FallbackKR", "ScriptwideSansCJK-B", "ScriptwideSansCJK-C", "ScriptwideSansCJK-A", sans-serif;
             margin: 20px;
         }
         .container {
@@ -28,14 +28,31 @@
 <body>
     <div class="container">
         <h1>Sort Characters by Unicode Codepoint</h1>
-        <h2>Note that this only works for characters in BMP.</h2>
         <input type="text" id="inputText" class="textbox" placeholder="Type something...">
         <div id="sortedText" class="result"></div>
     </div>
 
     <script>
+        function getCodePoints(str) {
+            const codePoints = [];
+            for (let i = 0; i < str.length; i++) {
+                const codePoint = str.codePointAt(i);
+                codePoints.push({
+                    char: String.fromCodePoint(codePoint),
+                    codePoint: codePoint
+                });
+                // Skip the next index if this is a surrogate pair
+                if (codePoint > 0xFFFF) {
+                    i++;
+                }
+            }
+            return codePoints;
+        }
+
         function sortCharactersByUnicode(str) {
-            return str.split('').sort((a, b) => a.codePointAt(0) - b.codePointAt(0)).join('');
+            const codePoints = getCodePoints(str);
+            codePoints.sort((a, b) => a.codePoint - b.codePoint);
+            return codePoints.map(item => item.char).join('');
         }
 
         document.getElementById('inputText').addEventListener('input', function() {
